@@ -2,8 +2,7 @@ import { useState } from 'react';
 
 function CompilerApp() {
   const [code, setCode] = useState('');
-  const [input, setInput] = useState(''); // Add 'input' state
-
+  const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
 
   const handleSubmit = async (e) => {
@@ -27,27 +26,36 @@ function CompilerApp() {
   };
 
   return (
-    <div>
-      <h1>Online Compiler</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="bg-gray-200 min-h-screen flex flex-col justify-center items-center">
+      <h1 className="text-3xl mb-4">Online Compiler</h1>
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
         <textarea
           value={code}
           onChange={(e) => setCode(e.target.value)}
-          rows='10'
-          cols='50'
+          rows="10"
+          cols="50"
+          className="w-full p-2 border rounded-lg mb-4"
+          placeholder="Enter your code here"
         />
-        <label>
+        <label className="block mb-4">
           User Input:
           <input
-            type='text'
+            type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            className="w-full p-2 border rounded-lg"
+            placeholder="Enter input (optional)"
           />
         </label>
-        <button type='submit'>Compile & Execute</button>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+        >
+          Compile & Execute
+        </button>
       </form>
-      <div>
-        <h2>Output</h2>
+      <div className="bg-white mt-4 p-2 rounded-lg shadow-md">
+        <h2 className="text-2xl mb-2">Output</h2>
         <pre>{output}</pre>
       </div>
     </div>
