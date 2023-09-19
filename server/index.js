@@ -1,54 +1,54 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const { exec } = require('child_process')
-const fs = require('fs')
-const path = require('path') 
-const cors = require('cors')
-const app = express()
-const port = 3001
+const express = require('express');
+const bodyParser = require('body-parser');
+const { exec } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+const cors = require('cors');
+const app = express();
+const port = 3001;
 
-app.use(bodyParser.json())
-app.use(cors())
+app.use(bodyParser.json());
+app.use(cors());
 
 app.post('/api/compile', (req, res) => {
-  const { code } = req.body
-  
-  const outputDirectory = path.join(__dirname, 'dist')
+  const { code, input } = req.body; // Add 'input' to the request body
 
-  // Create the 'dist' directory if it doesn't exist
+  const outputDirectory = path.join(__dirname, 'dist');
+
   if (!fs.existsSync(outputDirectory)) {
-    fs.mkdirSync(outputDirectory)
+    fs.mkdirSync(outputDirectory);
   }
 
-  // Write the C code to a file in the 'dist' directory
-  const cCodePath = path.join(outputDirectory, 'code.c')
-  fs.writeFileSync(cCodePath, code)
+  const cCodePath = path.join(outputDirectory, 'code.c');
+  fs.writeFileSync(cCodePath, code);
 
-  // Compile the C code using gcc in the 'dist' directory
+  // Create an input file with user input
+  const inputFilePath = path.join(outputDirectory, 'input.txt');
+  fs.writeFileSync(inputFilePath, input || ''); // Use provided input or an empty string
+
   exec(
     `gcc ${cCodePath} -o ${path.join(outputDirectory, 'output')}`,
     (compileError, compileStdout, compileStderr) => {
       if (compileError) {
-        console.error('Compilation Error:', compileError)
-        return res.json({ output: compileStderr })
+        console.error('Compilation Error:', compileError);
+        return res.json({ output: compileStderr });
       }
 
-      // Run the compiled binary from the 'dist' directory
       exec(
-        `${path.join(outputDirectory, 'output')}`,
+        `${path.join(outputDirectory, 'output')} < ${inputFilePath}`, // Redirect input from the 'input.txt' file
         (execError, execStdout, execStderr) => {
           if (execError) {
-            console.error('Execution Error:', execError)
-            return res.json({ output: execStderr })
+            console.error('Execution Error:', execError);
+            return res.json({ output: execStderr });
           }
 
-          res.json({ output: execStdout })
+          res.json({ output: execStdout });
         }
-      )
+      );
     }
-  )
-})
+  );
+});
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`)
-})
+  console.log(`Server is running on port ${port}`);
+});
