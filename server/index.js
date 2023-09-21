@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/api/compile', (req, res) => {
-  const { code, input } = req.body; // Add 'input' to the request body
+  const { code, input } = req.body; 
 
   const outputDirectory = path.join(__dirname, 'dist');
 
@@ -24,7 +24,7 @@ app.post('/api/compile', (req, res) => {
 
   // Create an input file with user input
   const inputFilePath = path.join(outputDirectory, 'input.txt');
-  fs.writeFileSync(inputFilePath, input || ''); // Use provided input or an empty string
+  fs.writeFileSync(inputFilePath, input || ''); 
 
   exec(
     `gcc ${cCodePath} -o ${path.join(outputDirectory, 'output')}`,
