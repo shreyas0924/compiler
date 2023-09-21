@@ -1,9 +1,8 @@
-import React from 'react';
 import { useUser } from '@clerk/clerk-react'
 import { Link } from 'react-router-dom'
 import { UserButton } from '@clerk/clerk-react'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { Code2 } from 'lucide-react'
 
 const Header = () => {
@@ -17,9 +16,12 @@ const Header = () => {
 
       <div className='flex justify-between items-center mx-auto mt-5 w-11/12 text-white py-5 '>
         <div className='flex items-center'>
-          <Link className='flex gap-3 items-center text-2xl font-bold text-gray-400' to='/'>
+          <Link
+            className='flex gap-3 items-center text-2xl font-bold text-gray-400'
+            to='/'
+          >
             <div className='mt-1'>
-               <Code2 />
+              <Code2 />
             </div>
             <div>Tequed Editor</div>
           </Link>
@@ -29,7 +31,6 @@ const Header = () => {
           {isSignedIn ? (
             <Link
               to='/editor'
-             
               className='text-lg text-gray-400 hover:text-white hover:underline'
             >
               Editor
@@ -56,18 +57,18 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <ToastContainer 
-      position="bottom-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-        />
+      <ToastContainer
+        position='bottom-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='dark'
+      />
     </div>
   )
 }

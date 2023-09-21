@@ -32,9 +32,8 @@ function CodeEditor() {
 
   return (
     <main className='bg-[#2c2f34]'>
-    <CodeHeader />
+      <CodeHeader />
       <div className=' min-h-screen flex flex-row border-t border-gray-500 '>
-
         <form
           onSubmit={handleSubmit}
           className='bg-[#2c2f34]   shadow-md w-3/5 border-r border-gray-500'
@@ -48,28 +47,29 @@ function CodeEditor() {
             defaultValue={`/* \n Enter your code here \n*/`}
             onChange={handleEditorChange}
           />
-<div className='px-2'>
-
-          <label className='block mb-4 text-white mt-4'>
-            User Input:
-            <input
-              type='text'
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className='w-3/5 mx-3 text-black p-2 border outline-none rounded-lg'
-              placeholder='Enter input (optional)'
-            />
-          </label>
-          <button
-            type='submit'
-            className='bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600'
-          >
-            Compile & Execute
-          </button>
+          <div className='px-2'>
+            <label className='block mb-4 text-white mt-4'>
+              User Input:
+              <input
+                type='text'
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className='w-1/2 mx-3 text-black p-2 border outline-none rounded-lg'
+                placeholder='Enter input (optional)'
+              />
+            </label>
+            <button
+              type='submit'
+              className='bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600'
+            >
+              Compile & Execute
+            </button>
           </div>
         </form>
         <div className='bg-[#2c2f34] ml-2 p-2 w-2/5 h-screen  shadow-md'>
-          <h2 className='text-xl text-white'>Output :<br /> {output}</h2>
+          <h2 className='text-xl text-white'>
+            Output :<br /> {output}
+          </h2>
         </div>
       </div>
     </main>
