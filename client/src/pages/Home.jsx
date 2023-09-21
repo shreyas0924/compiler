@@ -2,11 +2,14 @@
 
 // import { Link } from 'react-router-dom'
 import Header from '../components/Header'
+import Hero from '../components/hero'
+
 
 const Home = () => {
   return (
-    <div className="bg-black h-screen">
+    <div className="bg-[#1C1F25] h-screen">
       <Header/>
+      <Hero/>
     </div>
   )
 }
