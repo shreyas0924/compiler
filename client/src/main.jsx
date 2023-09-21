@@ -14,7 +14,6 @@ import {
   // useUser,
   // RedirectToSignIn,
 } from '@clerk/clerk-react'
-import ContactPage from './pages/Contact'
 
 if (!import.meta.env.VITE_APP_CLERK_PUBLISHABLE_KEY) {
   throw 'Missing Publishable Key'
@@ -39,10 +38,7 @@ const router = createBrowserRouter([
     path: '/sign-out',
     element: <Home />,
   },
-  {
-    path: '/contact',
-    element: <ContactPage />,
-  },
+
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
